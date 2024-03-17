@@ -1,0 +1,11 @@
+@mixin maxWidth($width) {
+  @media (max-width: $width + px) {
+    @content;
+  }
+}
+
+@mixin flex($justifyContent: normal, $alignItems: normal) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}

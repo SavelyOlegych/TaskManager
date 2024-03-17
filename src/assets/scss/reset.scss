@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  text-size-adjust: none;
+}
+
+body, p, h1, h2, h3 {
+  margin: 0;
+}
+
+input, textarea, button {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
