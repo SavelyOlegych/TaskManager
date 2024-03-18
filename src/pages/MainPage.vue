@@ -40,7 +40,6 @@ export default {
     width: 150px;
     height: 40px;
     margin: 0 auto;
-    padding-top: 4px;
     font-size: 20px;
 
     @include maxWidth(374) {
