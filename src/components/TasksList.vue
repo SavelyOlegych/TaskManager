@@ -1,44 +1,59 @@
 <template>
   <div class="tasks__list">
-    <article
-      class="tasks__item"
+    <TasksListItem
       v-for="task in 12"
       :key="task"
-    >
-      <h2 class="tasks__item-title">Lorem ipsum dolor sit amet.</h2>
-      <p class="tasks__item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam dolores ea expedita hic ipsa ipsum porro qui! Eaque eveniet nihil perspiciatis veritatis. Aperiam at consequuntur debitis, dolore dolores exercitationem facere facilis impedit in iusto modi nostrum porro quis quos repellat saepe similique sint tenetur totam ut? Aspernatur libero quam veritatis?</p>
-      <div class="tasks__item-actions">
-        <ActionButton
-          class="tasks__item-action-button"
-          theme="dark"
-          title="Edit task"
-        >
-          <EditIcon/>
-        </ActionButton>
-        <ActionButton
-          class="tasks__item-action-button"
-          theme="dark"
-          title="Delete task"
-        >
-          <DeleteIcon/>
-        </ActionButton>
-      </div>
-    </article>
+    />
   </div>
+  <Transition name="fade">
+    <CommonPopup
+      v-if="isEditPopupVisible"
+      @closePopup="setIsEditPopupVisible(false)"
+    >
+      <EditPopup/>
+    </CommonPopup>
+  </Transition>
+  <Transition name="fade">
+    <CommonPopup
+      v-if="isDeletePopupVisible"
+      @closePopup="setIsDeletePopupVisible(false)"
+    >
+      <DeletePopup/>
+    </CommonPopup>
+  </Transition>
 </template>
 
 <script>
-import ActionButton from "@/components/ActionButton.vue";
-import EditIcon from "@/components/icons/EditIcon.vue";
-import DeleteIcon from "@/components/icons/DeleteIcon.vue";
+import CommonPopup from "@/components/popups/CommonPopup.vue";
+import EditPopup from "@/components/popups/EditPopup.vue";
+import DeletePopup from "@/components/popups/DeletePopup.vue";
+import usePopups from "@/composables/usePopups";
+import TasksListItem from "@/components/TasksListItem.vue";
 
 export default {
   name: "TasksList",
-  components: { DeleteIcon, EditIcon, ActionButton },
+  components: { TasksListItem, DeletePopup, EditPopup, CommonPopup },
+  setup() {
+    const {
+      isEditPopupVisible,
+      setIsEditPopupVisible,
+      isDeletePopupVisible,
+      setIsDeletePopupVisible,
+    } = usePopups();
+    
+    return {
+      isEditPopupVisible,
+      setIsEditPopupVisible,
+      isDeletePopupVisible,
+      setIsDeletePopupVisible,
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/popup-transition";
+
 .tasks {
   &__list {
     display: grid;
@@ -51,33 +66,6 @@ export default {
 
     @include maxWidth(640) {
       grid-template-columns: 1fr;
-    }
-  }
-  
-  &__item {
-    background-color: #DEDEEF;
-    border-radius: 7px;
-    padding: 10px 20px 15px;
-    display: flex;
-    flex-direction: column;
-    color: $buttonBgColor;
-    
-    &-text {
-      margin: 15px 0 auto;
-    }
-    
-    &-actions {
-      @include flex(end);
-      margin-top: 15px;
-    }
-    
-    &-action-button {
-      width: 30px;
-      height: 30px;
-      
-      &:first-child {
-        margin-right: 15px;
-      }
     }
   }
 }

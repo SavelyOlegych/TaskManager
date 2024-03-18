@@ -20,8 +20,8 @@ export default {
   name: "CommonButton",
   props: {
     href: {
-      type: [String, null],
-      default: null,
+      type: String,
+      default: "",
     },
     theme: {
       type: String,
@@ -40,21 +40,23 @@ export default {
   
   &--light {
     background-color: $whiteColor;
-    color: $buttonBgColor;
+    color: $darkBgColor;
 
     &:hover {
-      background-color: $buttonBgColor;
+      background-color: $darkBgColor;
       color: $whiteColor;
     }
   }
 
   &--dark {
-    background-color: $buttonBgColor;
+    background-color: $darkBgColor;
     color: $whiteColor;
+    border: 2px solid transparent;
 
     &:hover {
       background-color: $whiteColor;
-      color: $buttonBgColor;
+      color: $darkBgColor;
+      border-color: $darkBgColor;
     }
   }
 }

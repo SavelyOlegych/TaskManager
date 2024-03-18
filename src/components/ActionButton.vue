@@ -30,14 +30,14 @@ export default {
     border-color: $whiteColor;
 
     &:hover {
-      border-color: $buttonBgColor;
-      color: $buttonBgColor;
+      border-color: $darkBgColor;
+      color: $darkBgColor;
     }
   }
 
   &--dark {
-    color: $buttonBgColor;
-    border-color: $buttonBgColor;
+    color: $darkBgColor;
+    border-color: $darkBgColor;
 
     &:hover {
       border-color: $bgColor;

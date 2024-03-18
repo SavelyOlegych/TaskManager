@@ -1,9 +1,8 @@
 import { createStore } from "vuex";
+import popups from "@/store/popups";
 
 export default createStore({
-    state: {},
-    getters: {},
-    mutations: {},
-    actions: {},
-    modules: {}
+    modules: {
+        popups
+    }
 });
