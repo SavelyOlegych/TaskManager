@@ -15,7 +15,7 @@
         class="tasks__item-action-button"
         theme="dark"
         title="Delete task"
-        @click="setIsDeletePopupVisible(true)"
+        @click="deleteTask"
       >
         <DeleteIcon/>
       </ActionButton>
@@ -27,7 +27,6 @@
 import ActionButton from "@/components/ActionButton.vue";
 import DeleteIcon from "@/components/icons/DeleteIcon.vue";
 import EditIcon from "@/components/icons/EditIcon.vue";
-import usePopups from "@/composables/usePopups";
 
 export default {
   name: "TasksListItem",
@@ -39,15 +38,17 @@ export default {
     }
   },
   setup(props, { emit }) {
-    const { setIsDeletePopupVisible } = usePopups();
-    
     const editTask = () => {
       emit("openEditPopup", props.task.id);
     }
+
+    const deleteTask = () => {
+      emit("openDeletePopup", props.task.id);
+    }
     
     return {
-      setIsDeletePopupVisible,
       editTask,
+      deleteTask,
     }
   }
 };

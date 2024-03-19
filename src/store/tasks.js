@@ -17,8 +17,8 @@ export default {
       task.title = updatedTask.title;
       task.description = updatedTask.description;
     },
-    DELETE_TASK(state, deletedTask) {
-      const task = state.tasks.find(task => task.id === deletedTask.id);
+    DELETE_TASK(state, deletedTaskId) {
+      const task = state.tasks.find(task => task.id === deletedTaskId);
       const taskIndex = state.tasks.indexOf(task);
       
       state.tasks.splice(taskIndex, 1);
@@ -43,8 +43,8 @@ export default {
       commit("UPDATE_TASK", updatedTask);
       dispatch("updateLocalStorageTasks")
     },
-    deleteTask({ commit, dispatch }, deletedTask) {
-      commit("DELETE_TASK", deletedTask);
+    deleteTask({ commit, dispatch }, deletedTaskId) {
+      commit("DELETE_TASK", deletedTaskId);
       dispatch("updateLocalStorageTasks");
     }
   }

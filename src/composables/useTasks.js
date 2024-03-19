@@ -7,7 +7,7 @@ export default function () {
   
   const createTaskAction = (createdTask) => store.dispatch("createTask", createdTask);
   const updateTaskAction = (updatedTask) => store.dispatch("updateTask", updatedTask);
-  const deleteTaskAction = (deletedTask) => store.dispatch("deleteTask", deletedTask);
+  const deleteTaskAction = (deletedTaskId) => store.dispatch("deleteTask", deletedTaskId);
   
   onMounted(() => {
     store.dispatch("setTasksFromLocalStorage");

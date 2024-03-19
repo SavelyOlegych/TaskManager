@@ -5,6 +5,7 @@
       :key="task.id"
       :task="task"
       @openEditPopup="openEditPopup"
+      @openDeletePopup="openDeletePopup"
     />
   </div>
   <Transition name="fade">
@@ -20,7 +21,7 @@
       v-if="isDeletePopupVisible"
       @closePopup="setIsDeletePopupVisible(false)"
     >
-      <DeletePopup/>
+      <DeletePopup :taskId="currentTaskId"/>
     </CommonPopup>
   </Transition>
 </template>
@@ -52,6 +53,10 @@ export default {
       currentTaskId.value = taskId;
       setIsEditPopupVisible(true);
     }
+    const openDeletePopup = (taskId) => {
+      currentTaskId.value = taskId;
+      setIsDeletePopupVisible(true);
+    }
     
     return {
       isEditPopupVisible,
@@ -61,6 +66,7 @@ export default {
       tasks,
       currentTaskId,
       openEditPopup,
+      openDeletePopup,
     }
   }
 };
