@@ -1,5 +1,5 @@
 <template>
-  <div class="tasks__list">
+  <div class="tasks__list" v-if="tasks.length > 0">
     <TasksListItem
       v-for="task in tasks"
       :key="task.id"
@@ -8,6 +8,7 @@
       @openDeletePopup="openDeletePopup"
     />
   </div>
+  <div class="tasks__no-tasks" v-else>You have no tasks</div>
   <Transition name="fade">
     <CommonPopup
       v-if="isEditPopupVisible"
@@ -88,6 +89,13 @@ export default {
     @include maxWidth(640) {
       grid-template-columns: 1fr;
     }
+  }
+  
+  &__no-tasks {
+    width: max-content;
+    margin: 100px auto 0;
+    font-style: italic;
+    font-size: 20px;
   }
 }
 </style>
