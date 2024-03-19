@@ -1,8 +1,9 @@
 <template>
   <div class="tasks__list">
     <TasksListItem
-      v-for="task in 12"
-      :key="task"
+      v-for="task in tasks"
+      :key="task.id"
+      :task="task"
     />
   </div>
   <Transition name="fade">
@@ -29,6 +30,7 @@ import EditPopup from "@/components/popups/EditPopup.vue";
 import DeletePopup from "@/components/popups/DeletePopup.vue";
 import usePopups from "@/composables/usePopups";
 import TasksListItem from "@/components/TasksListItem.vue";
+import useTasks from "@/composables/useTasks";
 
 export default {
   name: "TasksList",
@@ -41,11 +43,14 @@ export default {
       setIsDeletePopupVisible,
     } = usePopups();
     
+    const { tasks } = useTasks();
+    
     return {
       isEditPopupVisible,
       setIsEditPopupVisible,
       isDeletePopupVisible,
       setIsDeletePopupVisible,
+      tasks,
     }
   }
 };

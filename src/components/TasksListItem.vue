@@ -1,7 +1,7 @@
 <template>
   <article class="tasks__item">
-    <h2 class="tasks__item-title">Lorem ipsum dolor sit amet.</h2>
-    <p class="tasks__item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam dolores ea expedita hic ipsa ipsum porro qui! Eaque eveniet nihil perspiciatis veritatis. Aperiam at consequuntur debitis, dolore dolores exercitationem facere facilis impedit in iusto modi nostrum porro quis quos repellat saepe similique sint tenetur totam ut? Aspernatur libero quam veritatis?</p>
+    <h2 class="tasks__item-title">{{ task.title }}</h2>
+    <p class="tasks__item-text">{{ task.description }}</p>
     <div class="tasks__item-actions">
       <ActionButton
         class="tasks__item-action-button"
@@ -32,6 +32,12 @@ import usePopups from "@/composables/usePopups";
 export default {
   name: "TasksListItem",
   components: { ActionButton, EditIcon, DeleteIcon },
+  props: {
+    task: {
+      type: Object,
+      required: true,
+    }
+  },
   setup() {
     const { setIsEditPopupVisible, setIsDeletePopupVisible } = usePopups();
     
