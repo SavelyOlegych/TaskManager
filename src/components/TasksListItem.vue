@@ -7,7 +7,7 @@
         class="tasks__item-action-button"
         theme="dark"
         title="Edit task"
-        @click="setIsEditPopupVisible(true)"
+        @click="editTask"
       >
         <EditIcon/>
       </ActionButton>
@@ -38,12 +38,16 @@ export default {
       required: true,
     }
   },
-  setup() {
-    const { setIsEditPopupVisible, setIsDeletePopupVisible } = usePopups();
+  setup(props, { emit }) {
+    const { setIsDeletePopupVisible } = usePopups();
+    
+    const editTask = () => {
+      emit("openEditPopup", props.task.id);
+    }
     
     return {
-      setIsEditPopupVisible,
       setIsDeletePopupVisible,
+      editTask,
     }
   }
 };

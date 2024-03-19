@@ -4,6 +4,7 @@
       v-for="task in tasks"
       :key="task.id"
       :task="task"
+      @openEditPopup="openEditPopup"
     />
   </div>
   <Transition name="fade">
@@ -11,7 +12,7 @@
       v-if="isEditPopupVisible"
       @closePopup="setIsEditPopupVisible(false)"
     >
-      <EditPopup/>
+      <EditPopup :taskId="currentTaskId"/>
     </CommonPopup>
   </Transition>
   <Transition name="fade">
@@ -31,6 +32,7 @@ import DeletePopup from "@/components/popups/DeletePopup.vue";
 import usePopups from "@/composables/usePopups";
 import TasksListItem from "@/components/TasksListItem.vue";
 import useTasks from "@/composables/useTasks";
+import { ref } from "vue";
 
 export default {
   name: "TasksList",
@@ -45,12 +47,20 @@ export default {
     
     const { tasks } = useTasks();
     
+    const currentTaskId = ref(0);
+    const openEditPopup = (taskId) => {
+      currentTaskId.value = taskId;
+      setIsEditPopupVisible(true);
+    }
+    
     return {
       isEditPopupVisible,
       setIsEditPopupVisible,
       isDeletePopupVisible,
       setIsDeletePopupVisible,
       tasks,
+      currentTaskId,
+      openEditPopup,
     }
   }
 };
